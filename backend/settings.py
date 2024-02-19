@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import json
-import dj_database_url
 from os import environ
 import os
 
@@ -84,17 +83,26 @@ WSGI_APPLICATION = "backend.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 #   Set these environment variables in the .env file for this project.
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "django_isadb",
+#         "USER": "dandbisa",
+#         "PASSWORD": "FinnZee2016",
+#         "HOST": "isa-django-db1.c52yqs8cwnoz.eu-west-1.rds.amazonaws.com",
+#         "PORT": "5432",
+#     }
+# }
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "django_isadb",
-        "USER": "dandbisa",
-        "PASSWORD": "FinnZee2016",
-        "HOST": "isa-django-db1.c52yqs8cwnoz.eu-west-1.rds.amazonaws.com",
-        "PORT": "5432",
+        "NAME": os.getenv("DBNAME"),
+        "USER": os.getenv("DBUSER"),
+        "PASSWORD": os.getenv("DBPASS"),
+        "HOST": os.getenv("DBHOST"),
+        "PORT": os.getenv("DBPORT"),
     }
 }
-print(DATABASES)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
